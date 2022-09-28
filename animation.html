@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 75%;
+            margin: auto;
+            padding: 1rem;
+            border: 1px solid rgb(138, 106, 77);
+        }
+
+        .wrap {
+            border: 5px dashed peru;
+            margin: 50px;
+            padding: 50px 0;
+            position: relative;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            /* 原本顏色 */
+            background-color: #f2eee5;
+            color: #aaa;
+            line-height: 100px;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        /* 建立動畫 */
+        /* 
+        步驟1 建立關鍵影格(keyframes)，設定動畫名稱(名字自取)
+        以及from(0%)狀態，to(100%) 狀態
+         */
+        @keyframes animation {
+            0% {
+                background-color: #e4a99b;
+            }
+
+            50% {
+                background-color: #838bb2;
+            }
+
+            100% {
+                transform: translate(50vw, 0vw);
+                background-color: #e4a99b;
+            }
+        }
+
+        .animation {
+            /* 動畫名稱 */
+            animation-name: animation;
+            /* 動畫結束後會回到原本的顏色 */
+            /* 持續時間 ms 或 s */
+            animation-duration: 3s;
+            /* 播放次數，預設1，infinite是無限 */
+            animation-iteration-count: 1;
+            /* 轉場速率 
+            ease 預設
+            linear 線性，維持s等速
+            ease-in 由慢變快
+            ease-out 由快變慢
+            ease-in-out 由慢變快，由快變慢
+            easings.net 網站
+            */
+            animation-timing-function: cubic-bezier(0.3, 0.88, 0.33, 1.2);
+            /*
+            normal 是從左到右邊(正向，0%~100%)
+            reverse 是從右邊到左邊(反向，0%~100%)
+            alternate 正向(odd、0%~100%)、反向(even、100%~0%)交替播放
+            alternate-reverse 反向交替
+            */
+            animation-direction: normal;
+            animation-delay: 3s;
+            /* 
+            範例: 當animation-directon 正向撥放 0% => 100%
+            none=>動畫結束時回到沒有進入動畫的初始狀態
+            forwards=>停留在動畫最後一幀，根據動畫animation-direction設定有所不同
+            backwards=>當有設定delay時會有作用(動畫等待時期)，動畫一開始停在第一帧(正向撥放:0%)，結束後回到沒進入動畫的初始狀態
+            both=>在動畫中常用到，動畫一開始在第一幀，結束停留在動畫最後一幀，有delay最好設置both
+            */
+            animation-fill-mode: both;
+
+            /* 縮寫 */
+            animation: animation 2s 3s 1 cubic-bezier(0.3, 0.88, 0.33, 1.2) both;
+        }
+
+        .multiple {
+            animation-name: rotateIt, moveIt;
+            animation-duration: 3s, 6s;
+
+            /* 縮寫 */
+            animation: rotateIt 3s, moveIt 6s;
+            position: absolute;
+        }
+
+        @keyframes rotateIt {
+            /* 0% { */
+            /* transform: rotate(0deg); */
+            /* } */
+
+            50% {
+                transform: rotate(360deg);
+            }
+
+            /* 100% { */
+            /* transform: rotate(0deg); */
+            /* } */
+        }
+
+        @keyframes moveIt {
+
+            /* 0% {
+            margin-left: 0px;
+            }
+            50% { 
+            margin-left: 1000px; 
+             } */
+
+            /* 100% { 
+            margin-left: 0px; 
+             } */
+
+            0% {
+                left: 0;
+            }
+
+            50% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>動畫</h1>
+        <p>動畫與轉場</p>
+        <h2>animation</h2>
+        <ul>
+            <li>可以設定關鍵影格(keyframes)控制動畫進度的狀態，產生更複雜的動畫</li>
+            <li>網頁載入時自動發生，可以循環重複來回撥放等等</li>
+        </ul>
+        <h2>transition</h2>
+        <ul>
+            <li>要有觸發條件，兩種樣式狀態的改變，狀態通常為:hover或是:checked...狀態</li>
+            <li>無法在網頁載入時自動發生，為一次性且無循環效果，必須重新觸發一次</li>
+        </ul>
+        <div class="wrap">
+            <div class="box animation"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>可套用多個動畫</h2>
+        <div class="wrap">
+            <div class="box multiple"></div>
+        </div>
+    </div>
+</body>
+
+</html>
