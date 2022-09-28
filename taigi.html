@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taichi</title>
+
+    <style>
+        .taichi {
+            width: 600px;
+            height: 600px;
+            background-image: linear-gradient(90deg, white 50%, black 0%);
+            border-radius: 50%;
+            box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.5);
+            position: absolute;
+            /* 決對定位水平垂直置中 */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        /* 大白圓 */
+        .taichi::before {
+            content: "";
+            width: 300px;
+            height: 300px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            /* 對齊上方，以上方為主水平移動 */
+            top: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+        }
+
+        /* 大黑圓 */
+        .taichi::after {
+            content: "";
+            width: 300px;
+            height: 300px;
+            background: black;
+            border-radius: 50%;
+            position: absolute;
+            /* 對齊下方，以下方為主水平移動 */
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+        }
+
+        /* 小白圓 */
+
+        .yinyan::before {
+            content: "";
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: black;
+            position: absolute;
+            top: 25%;
+            right: 0;
+            left: 0;
+            margin: auto;
+            /* 移過頭再往上調整一點 */
+            transform: translateY(-50%);
+        }
+
+        /* 小黑圓 */
+        .yinyan::after {
+            content: "";
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: white;
+            position: absolute;
+            bottom: 25%;
+            right: 0;
+            left: 0;
+            margin: auto;
+            /* 移過頭再往上調整一點 */
+            transform: translateY(50%);
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="taichi">
+        <div class="yinyan"></div>
+    </div>
+
+</body>
+
+</html>
