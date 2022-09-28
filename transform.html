@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transform</title>
+    <!-- 全域選擇器把所有margin設定成0 -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Righteous&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        /* body繼承html 100% 高度 */
+        html,
+        body {
+            height: 100%;
+        }
+
+        /* 如果無設定html、body，會繼承body原本的高度 */
+        section {
+            height: 100%;
+            /* 水平垂直置中 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* 設定定位點 */
+            position: relative;
+        }
+
+        section:nth-child(odd) {
+            background: #f0e4d4;
+        }
+
+        section:nth-child(even) {
+            background: #f9d9ca
+        }
+
+        h1 {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* 知道盒子的位置 */
+        .dashed {
+            display: inline-block;
+            border: 5px dashed #d18063;
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        /* 
+        必須作用在block家族(block、table、list-item、flex ，都是block家族)、inline-block元素上
+        置換元素(replaced element)例如 img、input...、行內元素(inline) 不能使用 transform
+
+        */
+
+
+        /* 說明transform每一個屬性 */
+        .translate {
+            /* 第一個數值為移動50px(正:右，負:左)，第二個數值為Y(正:下，負:上)*/
+            /* 接受單位 px、em、rem、% */
+            /* 使用%時，實際長度會以元素本身尺寸來計算 */
+            transform: translate(50px, 100px);
+
+            /* 也可以設定 X 、 Y 移動 */
+            /* 後面會把前面原本的 X、Y 值全部洗掉 */
+            transform: translateX(50px);
+            transform: translateY(100px);
+        }
+
+        /* 縮放 */
+        .scale {
+            /* 以原本的數值去倍數顯示 */
+            transform: scale(1.5);
+            /* 可以設應單軸X、Y縮放 */
+            /* transform: scaleX(1.5); */
+            /* transform: scaleY(1.5); */
+
+            /* 變形原點，可以設定要從哪裡開始變形 */
+            /* 預設值是50% 50% box中心點 */
+            /* 單位可以是 %、px、em，或是關鍵字 left、right、top、bottom、center */
+            /* 原點對translate 沒有作用，正往左、負往右 */
+            transform-origin: center center;
+        }
+
+        /* 旋轉 */
+        .rotate {
+            /* 原點是中心點，正為順時針，負為逆時鐘，只寫一個值，另一邊會被設定為center*/
+            transform: rotate(-45deg);
+            transform-origin: 10px 100px;
+        }
+
+        /* 傾斜 */
+        .skew {
+            /* 可做出傾斜的視覺(PS.漸變也可以) */
+            transform: skew(-10deg, 10deg);
+            /* 可設定單軸，一樣會把前面全部的值覆蓋掉 */
+            transform: skewX(-10deg);
+            transform: skewY(45deg);
+            transform-origin: left top;
+        }
+
+        /* 多屬性 */
+        .more {
+            transform: translateX(100px) rotate(45deg);
+        }
+
+        .move1 {
+            width: 200px;
+            height: 200px;
+            background: #B97687;
+            position: absolute;
+            left: 0;
+            top: 0;
+            /* X軸水平移動後再旋轉45 deg */
+            transform: translateX(200px) rotate(45deg);
+        }
+
+        .move2 {
+            width: 200px;
+            height: 200px;
+            background: #c7d6d8;
+            position: absolute;
+            left: 0;
+            top: 0;
+            /* 先旋轉45deg再X軸水平移動 */
+            transform: rotate(45deg) translateX(200px);
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <!-- 滿版 -->
+        <h1>translate(位移)</h1>
+        <div class="dashed">
+            <!--水平置中 -->
+            <div class="box translate">translate(位移)</div>
+        </div>
+    </section>
+
+    <section>
+        <h1>scale(縮放)</h1>
+        <div class="dashed">
+            <div class="box scale">scale(縮放)</div>
+        </div>
+    </section>
+
+    <section>
+        <h1>rotate(旋轉)</h1>
+        <div class="dashed">
+            <div class="box rotate">rotate(旋轉)</div>
+        </div>
+    </section>
+
+    <section>
+        <h1>skew</h1>
+        <div class="dashed">
+            <div class="box skew">skew(傾斜)</div>
+        </div>
+    </section>
+
+    <section>
+        <h1>more(多屬性)</h1>
+        <div class="dashed">
+            <div class="box more">more(多屬性)</div>
+        </div>
+    </section>
+
+    <section>
+        <h1>move(屬性順序不一樣結果不一樣)</h1>
+        <div class="dashed">
+            <div class="move1"></div>
+            <div class="move2"></div>
+        </div>
+    </section>
+</body>
+
+</html>
